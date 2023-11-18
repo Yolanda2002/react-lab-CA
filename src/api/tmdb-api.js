@@ -85,4 +85,12 @@ export const getMovie = (args) => {
       .catch((error) => {
          throw error
     });
+  };
+
+export const getPeople = async () => {
+  const response = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch people');
   }
+  return response.json();
+};

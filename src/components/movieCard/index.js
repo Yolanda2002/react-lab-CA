@@ -1,4 +1,4 @@
-import React, { useContext  } from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -25,7 +25,7 @@ export default function MovieCard({ movie, action }) {
   } else {
     movie.favorite = false
   }
-  if (mustWatch.find((id) => id === movie.id)){
+  if (mustWatch.find((id) => id === movie.id)) {
     movie.mustWatch = true;
   } else {
     movie.mustWatch = false;
