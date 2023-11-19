@@ -21,7 +21,9 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   let displayedMovies = movies
     .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+      //Adjust it to meet the need of TV page.
+      const itemName = m.title || m.name;
+      return itemName.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;

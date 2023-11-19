@@ -102,3 +102,12 @@ export const getTopRatedMovies = async () => {
   }
   return await response.json();
 };
+
+export const getTVShows = async () => {
+  const url = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to fetch tv shows');
+  }
+  return await response.json();
+};
