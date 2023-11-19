@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
@@ -8,6 +8,16 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
+  const [languageFilter, setLanguageFilter] = useState("All");
+  const [languages, setLanguages] = useState(["All"]);
+
+  useEffect(() => {
+    const languageSet = new Set(languages);
+    movies.forEach((m) => {
+      languageSet.add(m.original_language);
+    });
+    setLanguages([...languageSet]);
+  }, [languages, movies]); 
 
   let displayedMovies = movies
     .filter((m) => {
@@ -15,10 +25,15 @@ function MovieListPageTemplate({ movies, title, action }) {
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+    })
+    .filter((m) => {
+      return languageFilter === "All" ? true : m.original_language === languageFilter;
     });
+
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
+    else if (type === "language") setLanguageFilter(value);
     else setGenreFilter(value);
   };
 
@@ -33,6 +48,8 @@ function MovieListPageTemplate({ movies, title, action }) {
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            languageFilter={languageFilter}
+            languages={languages}
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>

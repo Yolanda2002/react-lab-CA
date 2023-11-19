@@ -28,30 +28,33 @@ export default function FilterMoviesCard(props) {
     const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
     if (isLoading) {
-      return <Spinner />;
+        return <Spinner />;
     }
-  
+
     if (isError) {
-      return <h1>{error.message}</h1>;
+        return <h1>{error.message}</h1>;
     }
     const genres = data.genres;
-    if (genres[0].name !== "All"){
-      genres.unshift({ id: "0", name: "All" });
+    if (genres[0].name !== "All") {
+        genres.unshift({ id: "0", name: "All" });
     }
-    
+
     const handleChange = (e, type, value) => {
-      e.preventDefault();
-      props.onUserInput(type, value); // NEW
-    };
-  
-    const handleTextChange = (e, props) => {
-      handleChange(e, "name", e.target.value);
-    };
-  
-    const handleGenreChange = (e) => {
-      handleChange(e, "genre", e.target.value);
+        e.preventDefault();
+        props.onUserInput(type, value); // NEW
     };
 
+    const handleTextChange = (e, props) => {
+        handleChange(e, "name", e.target.value);
+    };
+
+    const handleGenreChange = (e) => {
+        handleChange(e, "genre", e.target.value);
+    };
+
+    const handleLanguageChange = (e) => {
+        handleChange(e, "language", e.target.value);
+    }
     return (
         // 卡片组件
         <Card
@@ -97,7 +100,26 @@ export default function FilterMoviesCard(props) {
                             );
                         })}
                     </Select>
+                </FormControl>,
+                <FormControl sx={{ ...formControl }}>
+                    <InputLabel id="genre-label">Language</InputLabel>
+                    <Select
+                        labelId="language-label"
+                        id="language-select"
+                        defaultValue=""
+                        value={props.languageFilter}
+                        onChange={handleLanguageChange}
+                    >
+                        {props.languages.map((language) => {
+                            return (
+                                <MenuItem key={language} value={language}>
+                                    {language}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
                 </FormControl>
+
             </CardContent>
             {/* 导入图片 */}
             <CardMedia
