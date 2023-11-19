@@ -2,10 +2,11 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-// import useMovie from "../hooks/useMovie";
 import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
+import { Box } from "@mui/material";
+
 const MoviePage = (props) => {
   const { id } = useParams();
   const { data: movie, error, isLoading, isError } = useQuery(
@@ -22,7 +23,8 @@ const MoviePage = (props) => {
   }
 
   return (
-    <>
+    //added box to decorate the pages.
+    <Box sx={{ padding: '20px' }}>
       {movie ? (
         <>
           <PageTemplate movie={movie}>
@@ -32,7 +34,7 @@ const MoviePage = (props) => {
       ) : (
         <p>Waiting for movie details</p>
       )}
-    </>
+    </Box>
   );
 };
 

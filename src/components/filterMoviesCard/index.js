@@ -60,7 +60,7 @@ export default function FilterMoviesCard(props) {
         <Card
             sx={{
                 maxWidth: 345,
-                backgroundColor: "rgb(204, 204, 0)"
+                backgroundImage: 'linear-gradient(to bottom, pink 30%, skyblue 80%)',
             }}
             variant="outlined">
 
