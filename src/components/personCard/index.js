@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom'; // 导入 RouterLink 组件
+import { Link as RouterLink } from 'react-router-dom'; 
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -19,10 +19,8 @@ export default function PersonCard({ person }) {
         <Typography gutterBottom variant="h6" component="div">
           {person.name}
         </Typography>
-        {/* 渲染电影链接 */}
         {person.known_for && person.known_for.map((movie) => (
           <Typography key={movie.id} variant="body2">
-            {/* 使用 RouterLink 作为 Link 组件的 'component' 属性以提供路由导航 */}
             <Link component={RouterLink} to={`/movies/${movie.id}`}>
               {movie.title}
             </Link>

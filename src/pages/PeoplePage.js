@@ -5,12 +5,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-import PersonCard from '../components/personCard'; // 假设你已经有了这个组件
+import PersonCard from '../components/personCard'; 
 
 export default function PeoplePage() {
   const [people, setPeople] = useState([]);
   const [genderFilter, setGenderFilter] = useState('all'); // 'male', 'female', 'all'
-  const [creditsFilter, setCreditsFilter] = useState(0);
+  const [creditsFilter] = useState(0);
 
   useEffect(() => {
     getPeople().then(data => {

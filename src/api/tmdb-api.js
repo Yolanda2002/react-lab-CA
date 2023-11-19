@@ -94,3 +94,11 @@ export const getPeople = async () => {
   }
   return response.json();
 };
+
+export const getTopRatedMovies = async () => {
+  const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
+};
